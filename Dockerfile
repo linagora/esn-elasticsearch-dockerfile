@@ -32,9 +32,9 @@ VOLUME /usr/share/elasticsearch/data
 # Install required ES Plugins
 RUN plugin --install com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/$ES_RIVER_VERSION
 
-COPY docker-entrypoint.sh /
-COPY initRiver.sh /usr/bin
-COPY start.sh /usr/bin
+COPY ./docker-entrypoint.sh /
+COPY ./scripts/initRiver.sh /usr/bin
+COPY ./scripts/start.sh /usr/bin
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
