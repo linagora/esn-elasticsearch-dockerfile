@@ -22,8 +22,15 @@ mongo_port="27017"
 mongo_db="rse"
 mongo_users_collection="users"
 mongo_communities_collection="communities"
+
+# If use in standalone
+[ -z "$MONGO_HOST" ] || mongo_host="$MONGO_HOST"
+[ -z "$MONGO_PORT" ] || mongo_port="$MONGO_PORT"
+
+# If use in a compose context
 [ -z "$ESN_MONGO_PORT_27017_TCP_ADDR" ] || mongo_host="$ESN_MONGO_PORT_27017_TCP_ADDR"
 [ -z "$ESN_MONGO_PORT_27017_TCP_PORT" ] || mongo_port="$ESN_MONGO_PORT_27017_TCP_PORT"
+
 [ -z "$MONGO_DB" ]                      || mongo_db="$MONGO_DB"
 [ -z "$MONGO_USERS_COLLECTION" ]        || mongo_users_collection="$MONGO_USERS_COLLECTION"
 [ -z "$MONGO_COMMUNITIES_COLLECTION" ]  || mongo_communities_collection="$MONGO_COMMUNITIES_COLLECTION"
