@@ -10,3 +10,7 @@ before_install:
 
 script:
   - docker ps
+
+notifications:
+  email:
+    - lgs-openpaas-dev@linagora.com
