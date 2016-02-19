@@ -37,10 +37,10 @@ VOLUME /usr/share/elasticsearch/data
 RUN plugin --install com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/$ES_RIVER_VERSION
 
 COPY ./docker-entrypoint.sh /
-COPY ./scripts/start.sh /usr/bin
-COPY ./scripts/init-openpaas.sh /usr/bin
+COPY ./scripts/start.sh /usr/bin/start.sh
+COPY ./scripts/init-openpaas.sh /usr/bin/init-openpaas.sh
 RUN chmod +x /usr/bin/init-openpaas.sh
-COPY ./scripts/init-rivers.sh /usr/bin
+COPY ./scripts/init-rivers.sh /usr/bin/init-rivers.sh
 RUN cp /opt/openpaas/wait-for-it/wait-for-it.sh /usr/bin/wait-for-it.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
