@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sh -c "sleep 20; /usr/bin/initRiver.sh" &
+wait-for-it.sh localhost:9200 -s -t 30 -- sh /usr/bin/init-openpaas.sh &
 elasticsearch -Des.discovery.zen.ping.multicast.enabled=false

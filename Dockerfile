@@ -21,8 +21,12 @@ ENV ES_RIVER_VERSION 2.0.2
 RUN echo "deb http://packages.elasticsearch.org/elasticsearch/${ELASTICSEARCH_VERSION%.*}/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 RUN apt-get update \
-	&& apt-get install elasticsearch=$ELASTICSEARCH_VERSION \
+	&& apt-get install -y elasticsearch=$ELASTICSEARCH_VERSION git \
 	&& rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/openpaas
+RUN git clone https://ci.open-paas.org/stash/scm/or/esn-elasticsearch-configuration.git config
+RUN git clone https://github.com/vishnubob/wait-for-it.git wait-for-it
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 COPY config /usr/share/elasticsearch/config
@@ -33,8 +37,11 @@ VOLUME /usr/share/elasticsearch/data
 RUN plugin --install com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/$ES_RIVER_VERSION
 
 COPY ./docker-entrypoint.sh /
-COPY ./scripts/initRiver.sh /usr/bin
 COPY ./scripts/start.sh /usr/bin
+COPY ./scripts/init-openpaas.sh /usr/bin
+RUN chmod +x /usr/bin/init-openpaas.sh
+COPY ./scripts/init-rivers.sh /usr/bin
+RUN cp /opt/openpaas/wait-for-it/wait-for-it.sh /usr/bin/wait-for-it.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
