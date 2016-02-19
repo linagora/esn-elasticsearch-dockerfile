@@ -5,6 +5,12 @@ services:
 
 before_install:
   - docker build -t linagora/esn-elasticsearch .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push linagora/esn-elasticsearch
 
 script:
   - docker ps
+
+notifications:
+  email:
+    - lgs-openpaas-dev@linagora.com
