@@ -22,3 +22,11 @@ docker build -t linagora/esn-elasticsearch .
 ```
 docker run -p 9200:9200 -p 9300:9300 linagora/esn-elasticsearch
 ```
+
+### Environment variables
+
+- ELASTICSEARCH_INIT_TIMEOUT: The timeout to wait to initialize elasticsearch indexes. The initialization script will be launched as soon as elasticsearch is reachable on its default port. Default value is 60 seconds.
+
+```
+docker run -p 9200:9200 -p 9300:9300 -e "ELASTICSEARCH_INIT_TIMEOUT=120" linagora/esn-elasticsearch
+```
