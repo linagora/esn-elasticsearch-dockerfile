@@ -1,3 +1,5 @@
+![Archived](https://img.shields.io/badge/Current_Status-archived-blue?style=flat)
+
 # Docker ESN Elasticsearch Container
 
 [![Build Status](https://travis-ci.org/linagora/esn-elasticsearch-dockerfile.svg?branch=master)](https://travis-ci.org/linagora/esn-elasticsearch-dockerfile)
